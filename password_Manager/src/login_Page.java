@@ -10,6 +10,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,9 +19,14 @@ public class login_Page implements ActionListener {
     final int width = 500;
     final int left_Bound_X = width/3; // Set the top and left bounds of the screen.
     final int top_Bound_Y = 20;
+    final int text_Size = 18;
+    final int field_Width = 130;
+    final int field_Height = 33;
+    final Font font = new Font("Arial", Font.PLAIN,text_Size);
 
     String user_Name_Input;
     String password_Input;
+
 
     JFrame window = new JFrame(); // Window to be created.
     JButton login_Button = new JButton("Login"); // Button to log user in.
@@ -38,13 +44,20 @@ public class login_Page implements ActionListener {
         window.setSize(width, height);
         window.setTitle("Password Manager");
 
+
+        // Set fonts
+        username_Label.setFont(font);
+        password_Label.setFont(font);
+        user_Name_Field.setFont(font);
+
         // Set bounds for username label and input field.
-        username_Label.setBounds(left_Bound_X, top_Bound_Y, 100, 28);
-        user_Name_Field.setBounds(left_Bound_X + username_Label.getWidth(), top_Bound_Y, 100, 28);
+        username_Label.setBounds(left_Bound_X, top_Bound_Y, field_Width, field_Height);
+        user_Name_Field.setBounds(left_Bound_X + username_Label.getWidth(), top_Bound_Y, field_Width, field_Height);
+
 
         // Set bounds for password label and input field.
-        password_Label.setBounds(left_Bound_X, top_Bound_Y+username_Label.getHeight(), 100, 28);
-        password_Field.setBounds(left_Bound_X + username_Label.getWidth(),  top_Bound_Y+username_Label.getHeight(), 100, 28);
+        password_Label.setBounds(left_Bound_X, top_Bound_Y+username_Label.getHeight(), field_Width, field_Height);
+        password_Field.setBounds(left_Bound_X + username_Label.getWidth(),  top_Bound_Y+username_Label.getHeight(), field_Width, field_Height);
 
         // Set bounds and action listener for the login button.
         login_Button.setBounds(left_Bound_X,top_Bound_Y + (username_Label.getHeight()*2), window.getWidth()/3, window.getHeight()/10);
@@ -61,7 +74,7 @@ public class login_Page implements ActionListener {
         window.setBackground(Color.DARK_GRAY); // Set the title bar to a gray.
         window.getContentPane().setBackground(Color.getHSBColor(200,200,100)); // Set the background color to a light gray.
         window.setResizable(false); // Keeps the window a constant size.
-        window.setVisible(disiplay); // Display the window.
+        window.setVisible(disiplay); // Display the window. 
     }
 
     @Override
