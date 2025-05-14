@@ -1,3 +1,4 @@
+package pages;
 /*
  * This class constructs the main login page for the user.
  * - Jordan
@@ -14,19 +15,20 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import constants.constants.login_Window;
+
 public class login_Page implements ActionListener {
-    final int height = 200; // Set default dimentions of the window.
-    final int width = 500;
-    final int left_Bound_X = width/3; // Set the top and left bounds of the screen.
+    final int window_Height = login_Window.login_Window_Height; // Set default dimentions of the window.
+    final int window_Width = login_Window.login_Window_Width;
+    final int left_Bound_X = window_Width/3; // Set the top and left bounds of the screen.
     final int top_Bound_Y = 20;
     final int text_Size = 18;
     final int field_Width = 130;
     final int field_Height = 33;
     final Font font = new Font("Arial", Font.PLAIN,text_Size);
 
-    String user_Name_Input;
+    String user_Name_Input; // Strings to be saved for user input.
     String password_Input;
-
 
     JFrame window = new JFrame(); // Window to be created.
     JButton login_Button = new JButton("Login"); // Button to log user in.
@@ -39,9 +41,9 @@ public class login_Page implements ActionListener {
     JTextField user_Name_Field = new JTextField();
     JPasswordField password_Field = new JPasswordField();
 
-    login_Page(boolean disiplay){
+    public login_Page(boolean disiplay){
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setSize(width, height);
+        window.setSize(window_Width, window_Height);
         window.setTitle("Password Manager");
 
 
