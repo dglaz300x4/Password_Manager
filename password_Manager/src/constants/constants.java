@@ -35,7 +35,11 @@ public final class constants {
     public final class custom_String { // Holds String constants.
         public static final String username_Label_Text = "Username";
         public static final String password_Label_Text = "Password";
+        
         public static final String login_Page_Button = "Login";
+        public static final String create_New_User_Button = "New User";
         public static final String title_Bar_Text = "Password Manager";
     }
+
+    public enum window_Page_Num {login, create_User, saved_Passwords};
 }
