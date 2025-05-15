@@ -10,42 +10,49 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import constants.constants.custom_Color;
+import constants.constants.custom_Font_Settings;
+import constants.constants.custom_String;
 import constants.constants.login_Window;
 
 public class login_Page implements ActionListener {
-    final int window_Height = login_Window.login_Window_Height; // Set default dimentions of the window.
-    final int window_Width = login_Window.login_Window_Width;
-    final int left_Bound_X = window_Width/3; // Set the top and left bounds of the screen.
-    final int top_Bound_Y = 20;
-    final int text_Size = 18;
-    final int field_Width = 130;
-    final int field_Height = 33;
-    final Font font = new Font("Arial", Font.PLAIN,text_Size);
+    static final int window_Height = login_Window.login_Window_Height; // Set default dimentions of the window.
+    static final int window_Width = login_Window.login_Window_Width;
+    static final int left_Bound_X = window_Width/3; // Set the top and left bounds of the screen.
+    static final int top_Bound_Y = login_Window.top_Bound_Y;
+    static final int field_Width = login_Window.login_Input_Field_Width;
+    static final int field_Height = login_Window.login_Input_Field_Height;
+    static final Font font = custom_Font_Settings.normal_Font;
+    boolean displayable;
 
     String user_Name_Input; // Strings to be saved for user input.
     String password_Input;
 
     JFrame window = new JFrame(); // Window to be created.
-    JButton login_Button = new JButton("Login"); // Button to log user in.
+    JButton login_Button = new JButton(custom_String.login_Page_Button); // Button to log user in.
     
     // Labels to direct user to which field is for which input.
-    JLabel username_Label = new JLabel("Username: "); 
-    JLabel password_Label = new JLabel("Password: ");
+    JLabel username_Label = new JLabel(custom_String.username_Label_Text); 
+    JLabel password_Label = new JLabel(custom_String.password_Label_Text);
     
     // Input fields for username and password.
     JTextField user_Name_Field = new JTextField();
     JPasswordField password_Field = new JPasswordField();
 
-    public login_Page(boolean disiplay){
+    public login_Page(boolean display){
+        displayable = display;
+        display_Window();
+    }
+
+    public void display_Window() { // Displays the window. 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(window_Width, window_Height);
-        window.setTitle("Password Manager");
-
+        window.setTitle(custom_String.title_Bar_Text);
+        
 
         // Set fonts
         username_Label.setFont(font);
@@ -73,10 +80,10 @@ public class login_Page implements ActionListener {
         window.add(login_Button);
 
         window.setLayout(null); // Disables the default layout to be set custom.
-        window.setBackground(Color.DARK_GRAY); // Set the title bar to a gray.
-        window.getContentPane().setBackground(Color.getHSBColor(200,200,100)); // Set the background color to a light gray.
+        window.setBackground(custom_Color.window_Title_bar); // Set the title bar to a gray.
+        window.getContentPane().setBackground(custom_Color.window_Background); // Set the background color to a light gray.
         window.setResizable(false); // Keeps the window a constant size.
-        window.setVisible(disiplay); // Display the window. 
+        window.setVisible(displayable); // Display the window. 
     }
 
     @Override
@@ -86,6 +93,8 @@ public class login_Page implements ActionListener {
             password_Input = password_Field.getPassword().toString();
             System.out.println("Password "+ password_Input);
             System.out.println("User " + user_Name_Input);
+            displayable = false;
+
         }
         
 
