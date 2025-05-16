@@ -38,6 +38,10 @@ public final class constants {
         
         public static final String login_Page_Button = "Login";
         public static final String create_New_User_Button = "New User";
+        public static final String cancel_Button = "Cancel";
+        public static final String add_Button = "Add User";
+
+
         public static final String title_Bar_Text = "Password Manager";
     }
 

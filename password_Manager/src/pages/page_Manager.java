@@ -50,7 +50,6 @@ public class page_Manager {
             }
         }
 
-
         return displayed_Page;
     }
 }

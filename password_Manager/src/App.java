@@ -10,12 +10,5 @@ public class App {
         window.setLocation(300,200);
 
         open = new window_Manager(true, window);
-
-
-        
-
-        
-
-
     }
 }
