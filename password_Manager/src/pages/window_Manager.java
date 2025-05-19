@@ -6,6 +6,7 @@ package pages;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -17,20 +18,21 @@ import constants.constants.custom_Color;
 import constants.constants.custom_Font_Settings;
 import constants.constants.custom_String;
 import constants.constants.login_Window;
+import constants.constants.password_Window;
 import constants.constants.window_Page_Num;
 import widgets.window_Render;
 
 public class window_Manager implements ActionListener{
 // Variables
-    private static final int window_Height = login_Window.login_Window_Height; // Set default dimentions of the window.
-    private static final int window_Width = login_Window.login_Window_Width;
-    private static final int left_Bound_X = window_Width/3; // Set the top and left bounds of the screen.
+    private static int window_Height; // Set dimentions of the window.
+    private static int window_Width;
+    private static final int left_Bound_X = login_Window.left_Bound_X; // Set the top and left bounds of the screen.
     private static final int top_Bound_Y = login_Window.top_Bound_Y;
     private static final int field_Width = login_Window.login_Input_Field_Width;
     private static final int field_Height = login_Window.login_Input_Field_Height;
     private static final Font font = custom_Font_Settings.normal_Font;
-    private boolean displayable;
-    private window_Page_Num current_Page; 
+    private static boolean displayable;
+    private static window_Page_Num current_Page; 
 
     // Labels to direct user to which field is for which input.
     private JLabel username_Label = new JLabel(custom_String.username_Label_Text); 
@@ -51,11 +53,23 @@ public class window_Manager implements ActionListener{
     public window_Manager(boolean display, window_Render renderer){
         window = renderer;
         displayable = display;
-        current_Page = window_Page_Num.login; // Sets default start up page to the login page.
         display_Login_Page();
     }
 
+    private static boolean is_Account(){
+        return false;
+    }
+
+    private static boolean is_Login_Data(){
+        return true;
+    }
+
     private void main_Login_Page(){
+        current_Page = window_Page_Num.login; 
+
+        window_Height = login_Window.height;
+        window_Width = login_Window.width;
+
         // Set dimensions.
         window.setSize(window_Width,window_Height);
         
@@ -92,18 +106,34 @@ public class window_Manager implements ActionListener{
         window.setVisible(displayable); // Display the window. 
     }
 
-    public void display_Login_Page(){ // Displays the login page. 
+    private void display_Login_Page(){ // Displays the login page. 
         current_Page = window_Page_Num.login;
         login_Add_Usr_Button = new JButton(custom_String.login_Page_Button);
         create_User_Cancel_Button = new JButton(custom_String.create_New_User_Button);
         main_Login_Page();
     }
 
-    public void display_Create_User_Page(){ // Displays the add/create user page.
+    private void display_Create_User_Page(){ // Displays the add/create user page.
         current_Page = window_Page_Num.create_User;
         login_Add_Usr_Button = new JButton(custom_String.add_Button);
         create_User_Cancel_Button = new JButton(custom_String.cancel_Button);
         main_Login_Page();
+    }
+
+    private void display_Passwords_Page(){ // Displays the page will all of the user's saved passwords. // Also first experiment with a JPanel.
+
+        JPanel layout = new JPanel();
+        JPanel left_Column = new JPanel();
+        JPanel password_Side = new JPanel();
+
+        
+
+        current_Page = window_Page_Num.saved_Passwords;
+        
+        window_Height = password_Window.height;
+        window_Width = password_Window.width;
+
+        window.setSize(window_Width, window_Height); // Adjust size of window to the 
     }
 
     @Override
@@ -119,7 +149,26 @@ public class window_Manager implements ActionListener{
             }
         }
         if (e.getSource() == login_Add_Usr_Button){
-
+            if (current_Page == window_Page_Num.create_User){ // Create a new user and send them to a blank passwords screen.
+                if (!is_Account()){ // Temporary until the login logic is created.
+                    window.clear_Window();
+                    display_Passwords_Page();
+                }
+                else{
+                    // Dont log in.
+                }
+                
+            }
+            if (current_Page == window_Page_Num.login){ // Log user into program and send them to their passwords screen.
+                if (is_Login_Data()){ // Temporary until login logic is
+                    window.clear_Window();
+                    display_Passwords_Page();
+                }
+                else{
+                    // Dont log in.
+                }
+                
+            }
         }
     }
 

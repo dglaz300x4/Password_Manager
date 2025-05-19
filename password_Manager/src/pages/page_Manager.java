@@ -12,10 +12,6 @@ public class page_Manager {
         return null;
     }
 
-    private ActionListener create_User_Page(){
-        return null;
-    }
-
     private ActionListener saved_Passwords_Page(){
         return null;
     }
@@ -35,10 +31,6 @@ public class page_Manager {
             switch (page) {
                 case window_Page_Num.login:
                     displayed_Page = login_Page();
-                    break;
-
-                case window_Page_Num.create_User:
-                    displayed_Page = create_User_Page();
                     break;
 
                 case window_Page_Num.saved_Passwords:

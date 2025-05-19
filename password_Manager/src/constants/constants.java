@@ -10,12 +10,25 @@ public final class constants {
     }
 
     public final class login_Window { // Holds the constant login window dimensions.
-        public static final int login_Window_Height = 200;
-        public static final int login_Window_Width = 500;
-        public static final int left_Bound_X = login_Window_Width/3;
+
+        private login_Window(){}
+
+        public static final int height = 200;
+        public static final int width = 500;
+        public static final int left_Bound_X = width/3;
         public static final int top_Bound_Y = 20;
         public static final int login_Input_Field_Width = 130;
         public static final int login_Input_Field_Height = 33;
+
+    }
+
+    public final class password_Window {
+        
+        private password_Window(){}
+
+        public static final int height = 700;
+        public static final int width = 900;
+
 
     }
     
