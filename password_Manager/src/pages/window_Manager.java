@@ -4,24 +4,20 @@ package pages;
  * - Jordan
  */
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-import constants.constants.custom_Color;
-import constants.constants.custom_Font_Settings;
-import constants.constants.custom_String;
-import constants.constants.login_Window;
-import constants.constants.password_Window;
-import constants.constants.window_Page_Num;
+import constants.constants.*;
 import widgets.window_Render;
 
 public class window_Manager implements ActionListener{
@@ -58,11 +54,11 @@ public class window_Manager implements ActionListener{
         display_Login_Page();
     }
 
-    private static boolean is_Account(){
+    private static boolean is_Account(){ // Checks if account already exists.
         return false;
     }
 
-    private static boolean is_Login_Data(){
+    private static boolean is_Login_Data(){ // Checks if account exists and the login information is correct.
         return true;
     }
 
@@ -129,24 +125,40 @@ public class window_Manager implements ActionListener{
 
         JButton add_Password_Button = new JButton(custom_String.password_Page.left_Panel.add_Password_Button_Text);
         JButton logout_Button = new JButton(custom_String.password_Page.left_Panel.logout_Button_Text);
+        ArrayList<JButton> passwords_List = new ArrayList<JButton>();
 
-        add_Password_Button.setSize(password_Window.width, left_Panel.getHeight()/10);
+        ActionListener button_Listener; //! Add listener
+
+
 
         left_Panel.setBounds(0,0, password_Window.left_Panel_Dimen.column_Width, password_Window.left_Panel_Dimen.column_Height); // Set dimensions and location for the column.
         left_Panel.setBackground(custom_Color.password_Column); // Set background color for column.
+        left_Panel.setLayout(new BoxLayout(left_Panel, BoxLayout.Y_AXIS));
 
         password_Side.setBounds(password_Window.left_Panel_Dimen.column_Width, 0, password_Window.passwords_Main_Page.page_Width, password_Window.passwords_Main_Page.page_Height); // Set dimensions and location for the passwords page.
         password_Side.setBackground(custom_Color.password_Background); // Set background color for the column.
+        password_Side.setLayout(new BoxLayout(password_Side, BoxLayout.Y_AXIS));
         
         layout.setBounds(0, 0, password_Window.width, password_Window.height); // Set location and size for the left panel 
-        layout.setLayout(null);
         layout.setBackground(Color.LIGHT_GRAY);
+
+        // Add buttons to the left panel.
+        left_Panel.add(add_Password_Button);
+        left_Panel.add(logout_Button);
         
 
-        left_Panel.add(add_Password_Button);
+
+        for (int i = 0; i < 5; ++i){
+            passwords_List.add(new JButton("Button: " + i));
+            password_Side.add(passwords_List.get(i));
+
+        }
+
+
 
         layout.add(left_Panel);
         layout.add(password_Side);
+        layout.setLayout(null);
 
         current_Page = window_Page_Num.saved_Passwords;
         
@@ -157,6 +169,7 @@ public class window_Manager implements ActionListener{
         window.add(layout);
         window.setLayout(null);
         window.setVisible(displayable);
+
     }
 
     @Override
