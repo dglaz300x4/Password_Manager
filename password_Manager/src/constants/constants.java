@@ -29,6 +29,20 @@ public final class constants {
         public static final int height = 700;
         public static final int width = 900;
 
+        public final class left_Panel_Dimen{
+            
+            private left_Panel_Dimen(){}
+
+            public static final int column_Width = width/5;
+            public static final int column_Height = height;
+        }
+
+        public final class passwords_Main_Page{
+            private passwords_Main_Page(){}
+
+            public static final int page_Width = width-left_Panel_Dimen.column_Width;
+            public static final int page_Height = height;
+        }
 
     }
     
@@ -43,16 +57,34 @@ public final class constants {
     public final class custom_Color { // Holds the color constants for the window.
         public static final Color window_Background = Color.getHSBColor(200,200,100);
         public static final Color window_Title_bar = Color.DARK_GRAY;
+
+        public static final Color password_Column = Color.BLUE;
+        public static final Color password_Background = Color.GRAY;
     }
 
     public final class custom_String { // Holds String constants.
-        public static final String username_Label_Text = "Username";
-        public static final String password_Label_Text = "Password";
-        
-        public static final String login_Page_Button = "Login";
-        public static final String create_New_User_Button = "New User";
-        public static final String cancel_Button = "Cancel";
-        public static final String add_Button = "Add User";
+
+        public final class login_Page{
+            public static final String username_Label_Text = "Username";
+            public static final String password_Label_Text = "Password";
+            
+            public static final String login_Page_Button = "Login";
+            public static final String create_New_User_Button = "New User";
+            public static final String cancel_Button = "Cancel";
+            public static final String add_Button = "Add User";
+        }
+
+        public final class password_Page{
+            public final class left_Panel{
+                public static final String add_Password_Button_Text = "Add New Password";
+                public static final String logout_Button_Text = "Logout";
+            }
+
+            public final class main_Password_Page{
+                public static final String passwords_Title = "Saved Passwords";
+                public static final String no_Saved_Passwords_Text = "There are currently no saved passwords";
+            }
+        }
 
 
         public static final String title_Bar_Text = "Password Manager";

@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,15 +37,15 @@ public class window_Manager implements ActionListener{
     private static window_Page_Num current_Page; 
 
     // Labels to direct user to which field is for which input.
-    private JLabel username_Label = new JLabel(custom_String.username_Label_Text); 
-    private JLabel password_Label = new JLabel(custom_String.password_Label_Text);
+    private JLabel username_Label = new JLabel(custom_String.login_Page.username_Label_Text); 
+    private JLabel password_Label = new JLabel(custom_String.login_Page.password_Label_Text);
 
     private String user_Name_Input; // Strings to save  user input.
     private String password_Input;
 
     private window_Render window = new window_Render(); // Window to be created.
-    private JButton login_Add_Usr_Button;// = new JButton(custom_String.login_Page_Button); // Button to log user in.
-    private JButton create_User_Cancel_Button = new JButton(custom_String.create_New_User_Button);
+    private JButton login_Add_Usr_Button;// = new JButton(custom_String.login_Page.login_Page_Button); // Button to log user in.
+    private JButton create_User_Cancel_Button = new JButton(custom_String.login_Page.create_New_User_Button);
 
     // Input fields for username and password.
     private JTextField user_Name_Field = new JTextField();
@@ -108,25 +110,43 @@ public class window_Manager implements ActionListener{
 
     private void display_Login_Page(){ // Displays the login page. 
         current_Page = window_Page_Num.login;
-        login_Add_Usr_Button = new JButton(custom_String.login_Page_Button);
-        create_User_Cancel_Button = new JButton(custom_String.create_New_User_Button);
+        login_Add_Usr_Button = new JButton(custom_String.login_Page.login_Page_Button);
+        create_User_Cancel_Button = new JButton(custom_String.login_Page.create_New_User_Button);
         main_Login_Page();
     }
 
     private void display_Create_User_Page(){ // Displays the add/create user page.
         current_Page = window_Page_Num.create_User;
-        login_Add_Usr_Button = new JButton(custom_String.add_Button);
-        create_User_Cancel_Button = new JButton(custom_String.cancel_Button);
+        login_Add_Usr_Button = new JButton(custom_String.login_Page.add_Button);
+        create_User_Cancel_Button = new JButton(custom_String.login_Page.cancel_Button);
         main_Login_Page();
     }
 
-    private void display_Passwords_Page(){ // Displays the page will all of the user's saved passwords. // Also first experiment with a JPanel.
-
+    private void display_Passwords_Page(){ // Displays the page will all of the user's saved passwords. // Also first experimentation with a JPanel.
         JPanel layout = new JPanel();
-        JPanel left_Column = new JPanel();
+        JPanel left_Panel = new JPanel();
         JPanel password_Side = new JPanel();
 
+        JButton add_Password_Button = new JButton(custom_String.password_Page.left_Panel.add_Password_Button_Text);
+        JButton logout_Button = new JButton(custom_String.password_Page.left_Panel.logout_Button_Text);
+
+        add_Password_Button.setSize(password_Window.width, left_Panel.getHeight()/10);
+
+        left_Panel.setBounds(0,0, password_Window.left_Panel_Dimen.column_Width, password_Window.left_Panel_Dimen.column_Height); // Set dimensions and location for the column.
+        left_Panel.setBackground(custom_Color.password_Column); // Set background color for column.
+
+        password_Side.setBounds(password_Window.left_Panel_Dimen.column_Width, 0, password_Window.passwords_Main_Page.page_Width, password_Window.passwords_Main_Page.page_Height); // Set dimensions and location for the passwords page.
+        password_Side.setBackground(custom_Color.password_Background); // Set background color for the column.
         
+        layout.setBounds(0, 0, password_Window.width, password_Window.height); // Set location and size for the left panel 
+        layout.setLayout(null);
+        layout.setBackground(Color.LIGHT_GRAY);
+        
+
+        left_Panel.add(add_Password_Button);
+
+        layout.add(left_Panel);
+        layout.add(password_Side);
 
         current_Page = window_Page_Num.saved_Passwords;
         
@@ -134,6 +154,9 @@ public class window_Manager implements ActionListener{
         window_Width = password_Window.width;
 
         window.setSize(window_Width, window_Height); // Adjust size of window to the 
+        window.add(layout);
+        window.setLayout(null);
+        window.setVisible(displayable);
     }
 
     @Override
