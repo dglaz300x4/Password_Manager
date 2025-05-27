@@ -9,10 +9,15 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.SpringLayout;
+import javax.swing.border.Border;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -21,6 +26,8 @@ import constants.constants.*;
 import widgets.window_Render;
 
 public class window_Manager implements ActionListener{
+
+    //? Should I create a new class to hold the functions to create a new frame. (Class with jframe and listener, each function to set up new page) (Maybe pass in the page number to create/adjust the window)
 // Variables
     private static int window_Height; // Set dimentions of the window.
     private static int window_Width;
@@ -52,6 +59,8 @@ public class window_Manager implements ActionListener{
         window = renderer;
         displayable = display;
         display_Login_Page();
+
+        //display_Saved_Passwords_Page();
     }
 
     private static boolean is_Account(){ // Checks if account already exists.
@@ -118,58 +127,69 @@ public class window_Manager implements ActionListener{
         main_Login_Page();
     }
 
-    private void display_Passwords_Page(){ // Displays the page will all of the user's saved passwords. // Also first experimentation with a JPanel.
-        JPanel layout = new JPanel();
-        JPanel left_Panel = new JPanel();
-        JPanel password_Side = new JPanel();
-
-        JButton add_Password_Button = new JButton(custom_String.password_Page.left_Panel.add_Password_Button_Text);
-        JButton logout_Button = new JButton(custom_String.password_Page.left_Panel.logout_Button_Text);
-        ArrayList<JButton> passwords_List = new ArrayList<JButton>();
-
-        ActionListener button_Listener; //! Add listener
-
-
-
-        left_Panel.setBounds(0,0, password_Window.left_Panel_Dimen.column_Width, password_Window.left_Panel_Dimen.column_Height); // Set dimensions and location for the column.
-        left_Panel.setBackground(custom_Color.password_Column); // Set background color for column.
-        left_Panel.setLayout(new BoxLayout(left_Panel, BoxLayout.Y_AXIS));
-
-        password_Side.setBounds(password_Window.left_Panel_Dimen.column_Width, 0, password_Window.passwords_Main_Page.page_Width, password_Window.passwords_Main_Page.page_Height); // Set dimensions and location for the passwords page.
-        password_Side.setBackground(custom_Color.password_Background); // Set background color for the column.
-        password_Side.setLayout(new BoxLayout(password_Side, BoxLayout.Y_AXIS));
+    private ArrayList<JButton> get_Passwords(){ // Gets the button list for the passwords.
+        ArrayList<JButton> temp = new ArrayList<JButton>(); 
+        JButton temp_Button;
+        for (int i = 0; i < 35; ++i){
+            temp_Button = new JButton("Button: " + (i+1));
+            temp_Button.setSize(400, 200);
+            temp.add(temp_Button);
+        }        
         
-        layout.setBounds(0, 0, password_Window.width, password_Window.height); // Set location and size for the left panel 
-        layout.setBackground(Color.LIGHT_GRAY);
+        return temp;
+    }
 
-        // Add buttons to the left panel.
-        left_Panel.add(add_Password_Button);
-        left_Panel.add(logout_Button);
+    private void display_Saved_Passwords_Page(){
+        JPanel options_Panel = new JPanel();
+        JPanel passwords_Panel = new JPanel();
+
+        JScrollPane scrolling_Passwords;
+
         
+        JButton add_New_Password = new JButton(custom_String.password_Page.left_Panel.add_Password_Button_Text);
+        JButton log_Out = new JButton(custom_String.password_Page.left_Panel.logout_Button_Text);
 
+        ArrayList<JButton> passwords_List = get_Passwords();
 
-        for (int i = 0; i < 5; ++i){
-            passwords_List.add(new JButton("Button: " + i));
-            password_Side.add(passwords_List.get(i));
-
-        }
-
-
-
-        layout.add(left_Panel);
-        layout.add(password_Side);
-        layout.setLayout(null);
-
-        current_Page = window_Page_Num.saved_Passwords;
-        
         window_Height = password_Window.height;
         window_Width = password_Window.width;
-
         window.setSize(window_Width, window_Height); // Adjust size of window to the 
-        window.add(layout);
-        window.setLayout(null);
-        window.setVisible(displayable);
 
+
+        // Options Panel 
+        options_Panel.setBounds(0,0, password_Window.left_Panel_Dimen.column_Width, password_Window.left_Panel_Dimen.column_Height); // Set dimensions and location for the column.
+        options_Panel.setBackground(custom_Color.password_Column); // Set background color for column.
+        options_Panel.setLayout(new BoxLayout(options_Panel, BoxLayout.Y_AXIS));
+
+        options_Panel.add(add_New_Password);
+        options_Panel.add(log_Out);
+
+        // Passwords Panel
+        passwords_Panel.setSize(password_Window.passwords_Main_Page.page_Width, password_Window.passwords_Main_Page.page_Height);
+        passwords_Panel.setBackground(custom_Color.password_Background);
+        passwords_Panel.setLayout(new BoxLayout(passwords_Panel, BoxLayout.Y_AXIS));
+
+        for (int i = 0; i < passwords_List.size(); ++i){
+            passwords_Panel.add(passwords_List.get(i));
+        }
+
+        
+
+        // Scrolling Panel
+        /*
+        
+        scrolling_Passwords.setLayout(null);
+        scrolling_Passwords.getVerticalScrollBar().setValue(0);
+
+        scrolling_Passwords.add(passwords_Panel); */
+
+        scrolling_Passwords = new JScrollPane(passwords_Panel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrolling_Passwords.setBounds(password_Window.left_Panel_Dimen.column_Width, 0, password_Window.passwords_Main_Page.page_Width, password_Window.passwords_Main_Page.page_Height-28);
+
+        window.getContentPane().add(options_Panel, BorderLayout.WEST);
+        window.getContentPane().add(scrolling_Passwords);
+        
+        window.setVisible(displayable);
     }
 
     @Override
@@ -188,7 +208,7 @@ public class window_Manager implements ActionListener{
             if (current_Page == window_Page_Num.create_User){ // Create a new user and send them to a blank passwords screen.
                 if (!is_Account()){ // Temporary until the login logic is created.
                     window.clear_Window();
-                    display_Passwords_Page();
+                    display_Saved_Passwords_Page();
                 }
                 else{
                     // Dont log in.
@@ -198,7 +218,7 @@ public class window_Manager implements ActionListener{
             if (current_Page == window_Page_Num.login){ // Log user into program and send them to their passwords screen.
                 if (is_Login_Data()){ // Temporary until login logic is
                     window.clear_Window();
-                    display_Passwords_Page();
+                    display_Saved_Passwords_Page();
                 }
                 else{
                     // Dont log in.
