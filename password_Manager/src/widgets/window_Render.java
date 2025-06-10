@@ -10,6 +10,7 @@ public class window_Render extends JFrame{
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         super.setTitle(custom_String.title_Bar_Text);
         super.setResizable(false); // Constant size by default.
+        super.setLocation(300, 200);
     }
 
     // Public 

@@ -9,6 +9,29 @@ public final class constants {
         // You shall not call!
     }
 
+    public final class page_Names {
+        public static final String login_Page = window_Page_Num.login.toString();
+        public static final String create_User_Page = window_Page_Num.create_User.toString();
+        public static final String passwords_Page = window_Page_Num.saved_Passwords.toString();
+
+        public static String get_Name(window_Page_Num page){
+            String page_Name = new String();
+            switch (page) {
+                case window_Page_Num.login:
+                    page_Name = login_Page;
+                    break;
+                case window_Page_Num.create_User:
+                    page_Name = create_User_Page;
+                    break;
+                case window_Page_Num.saved_Passwords:
+                    page_Name = passwords_Page;
+                    break;
+
+            }
+            return page_Name;
+        }
+    }
+
     public final class login_Window { // Holds the constant login window dimensions.
 
         private login_Window(){}
@@ -19,6 +42,8 @@ public final class constants {
         public static final int top_Bound_Y = 20;
         public static final int login_Input_Field_Width = 130;
         public static final int login_Input_Field_Height = 33;
+        public static final int login_Page_Button_Width = width/3;
+        public static final int login_Page_Button_Height = height/10;
 
     }
 
@@ -71,7 +96,7 @@ public final class constants {
             public static final String login_Page_Button = "Login";
             public static final String create_New_User_Button = "New User";
             public static final String cancel_Button = "Cancel";
-            public static final String add_Button = "Add User";
+            public static final String add_New_User_Button = "Add User";
         }
 
         public final class password_Page{
