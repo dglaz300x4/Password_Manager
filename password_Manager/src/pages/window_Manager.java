@@ -1,6 +1,6 @@
 package pages;
 /*
- * This class constructs the main login page for the user.
+ * This class holds the pages and page navigation to be displayed.
  * - Jordan
  */
 
@@ -15,8 +15,6 @@ import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import constants.constants;
@@ -25,7 +23,6 @@ import widgets.window_Render;
 
 public class window_Manager{
 
-    //? Should I create a new class to hold the functions to create a new frame. (Class with jframe and listener, each function to set up new page) (Maybe pass in the page number to create/adjust the window)
 // Variables
     private static int window_Height; // Set dimentions of the window.
     private static int window_Width;
@@ -99,7 +96,20 @@ public class window_Manager{
         window.add(display_Page);
     }
 
-    private JPanel main_Login_Page(){
+    private ArrayList<JButton> get_Passwords(){ // Gets the button list for the passwords.
+        ArrayList<JButton> temp = new ArrayList<JButton>(); 
+        JButton temp_Button;
+        for (int i = 0; i < 35; ++i){
+            temp_Button = new JButton("Button: " + (i+1));
+            temp_Button.setSize(400, 200);
+            temp.add(temp_Button);
+        }        
+        
+        return temp;
+    }
+
+// Pages
+    private JPanel main_Login_Page(){ // Returns the main login page to be added to the card layout.
         JPanel login_Page = new JPanel();
         
         // Labels to direct user to which field is for which input.
@@ -113,10 +123,12 @@ public class window_Manager{
         // Buttons for logging in and adding a new user.
         JButton login_Button = new JButton(custom_String.login_Page.login_Page_Button);
         JButton create_User_Button = new JButton(custom_String.login_Page.create_New_User_Button);
-
+        
+        // Set button dimensions.
         int button_Width = constants.login_Window.login_Page_Button_Width;
         int button_Height = constants.login_Window.login_Page_Button_Height;
 
+        // Set panel layout, color, and dimensions.
         login_Page.setLayout(null);
         login_Page.setBackground(custom_Color.window_Background);
         login_Page.setSize(window_Width, window_Height);
@@ -159,7 +171,7 @@ public class window_Manager{
         return login_Page;
     }
 
-    private JPanel new_User_Login_Page(){
+    private JPanel new_User_Login_Page(){ // Returns the new user login page to be added to the card layout
         JPanel new_User = new JPanel();
 
         // Labels to direct user to which field is for which input.
@@ -174,9 +186,11 @@ public class window_Manager{
         JButton login_New_User_Button = new JButton(custom_String.login_Page.add_New_User_Button);
         JButton cancel_Button = new JButton(custom_String.login_Page.cancel_Button);
 
+        // Set button dimensions.
         int button_Width = constants.login_Window.login_Page_Button_Width;
         int button_Height = constants.login_Window.login_Page_Button_Height;
-
+        
+        // Set panel layout, color, and dimensions.
         new_User.setLayout(null);
         new_User.setBackground(custom_Color.window_Background);
         new_User.setSize(window_Width, window_Height);
@@ -194,6 +208,7 @@ public class window_Manager{
         password_Label.setBounds(left_Bound_X, top_Bound_Y+username_Label.getHeight(), field_Width, field_Height);
         password_Field.setBounds(left_Bound_X + username_Label.getWidth(),  top_Bound_Y+username_Label.getHeight(), field_Width, field_Height);
 
+        // Set bounds and action listener for the login and create user buttons.
         login_New_User_Button.setBounds((left_Bound_X*2)/5, top_Bound_Y + (username_Label.getHeight()*2), button_Width, button_Height);
         cancel_Button.setBounds((left_Bound_X*3)/5 + login_New_User_Button.getWidth(), top_Bound_Y + (username_Label.getHeight()*2),  button_Width, button_Height);
         login_New_User_Button.addActionListener(
@@ -218,19 +233,7 @@ public class window_Manager{
         return new_User;
     }
 
-    private ArrayList<JButton> get_Passwords(){ // Gets the button list for the passwords.
-        ArrayList<JButton> temp = new ArrayList<JButton>(); 
-        JButton temp_Button;
-        for (int i = 0; i < 35; ++i){
-            temp_Button = new JButton("Button: " + (i+1));
-            temp_Button.setSize(400, 200);
-            temp.add(temp_Button);
-        }        
-        
-        return temp;
-    }
-
-    private JPanel saved_Passwords_Page(){
+    private JPanel saved_Passwords_Page(){ // Returns a the passwords page to be added to the card layout.
         JPanel saved_Passwords = new JPanel(new BorderLayout());
         JPanel options_Panel = new JPanel(); // Options panel to display the options for adding a new password.
         JPanel passwords_Panel = new JPanel(); // Passwords panel to display the list of passwords.
@@ -283,6 +286,5 @@ public class window_Manager{
         
         return saved_Passwords;
     }
-
 
 }
