@@ -67,6 +67,9 @@ public final class constants {
 
             public static final int page_Width = width-left_Panel_Dimen.column_Width;
             public static final int page_Height = height;
+
+            public static final int button_Height = page_Height/12;
+            public static final int button_Width = page_Width/3;
         }
 
     }

@@ -13,12 +13,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.CardLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.util.ArrayList;
-
+import javax.swing.Box;
 import constants.constants;
 import constants.constants.*;
+import widgets.saved_Password_Button;
 import widgets.window_Render;
 
 public class window_Manager{
@@ -96,13 +101,10 @@ public class window_Manager{
         window.add(display_Page);
     }
 
-    private ArrayList<JButton> get_Passwords(){ // Gets the button list for the passwords.
-        ArrayList<JButton> temp = new ArrayList<JButton>(); 
-        JButton temp_Button;
-        for (int i = 0; i < 35; ++i){
-            temp_Button = new JButton("Button: " + (i+1));
-            temp_Button.setSize(400, 200);
-            temp.add(temp_Button);
+    private ArrayList<saved_Password_Button> get_Passwords(){ // Gets the button list for the passwords.
+        ArrayList<saved_Password_Button> temp = new ArrayList<saved_Password_Button>(); 
+        for (int i = 0; i < 3; ++i){
+            temp.add(new saved_Password_Button("Hello","Goodbye"+i));
         }        
         
         return temp;
@@ -238,13 +240,15 @@ public class window_Manager{
         JPanel options_Panel = new JPanel(); // Options panel to display the options for adding a new password.
         JPanel passwords_Panel = new JPanel(); // Passwords panel to display the list of passwords.
 
+        BoxLayout password_Panel_Layout = new BoxLayout(passwords_Panel, BoxLayout.Y_AXIS);
+
         JScrollPane scrolling_Passwords; // Scrolling panel to add the passwords panel to that would make the page scrollable.
 
         
         JButton add_New_Password = new JButton(custom_String.password_Page.left_Panel.add_Password_Button_Text); // Creates the button add a new password to the list.
         JButton log_Out = new JButton(custom_String.password_Page.left_Panel.logout_Button_Text); // Button to log out of user.
 
-        ArrayList<JButton> passwords_List = get_Passwords();    
+        ArrayList<saved_Password_Button> passwords_List = get_Passwords();    
 
         // Buttons
         log_Out.addActionListener( // Logout and return to login page.
@@ -265,25 +269,22 @@ public class window_Manager{
         // Passwords Panel
         passwords_Panel.setSize(password_Window.passwords_Main_Page.page_Width, password_Window.passwords_Main_Page.page_Height);
         passwords_Panel.setBackground(custom_Color.password_Background);
-        passwords_Panel.setLayout(new BoxLayout(passwords_Panel, BoxLayout.Y_AXIS));
-
+        passwords_Panel.setLayout(password_Panel_Layout);
+        
         for (int i = 0; i < passwords_List.size(); ++i){
-            int temp = i;
-            passwords_List.get(i).addActionListener(
-                e->{
-                    System.out.println(temp);
-                }
-            );
             passwords_Panel.add(passwords_List.get(i));
+            passwords_Panel.add(Box.createRigidArea(new Dimension(0,10))); // THIS LINE IS A LIFE SAVER AT KEEPING DIMENSIONS!
         }
 
         // Scrolling Panel
         scrolling_Passwords = new JScrollPane(passwords_Panel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrolling_Passwords.setBounds(password_Window.left_Panel_Dimen.column_Width, 0, password_Window.passwords_Main_Page.page_Width, password_Window.passwords_Main_Page.page_Height-28);
+        scrolling_Passwords.setBounds(password_Window.left_Panel_Dimen.column_Width, 0, password_Window.passwords_Main_Page.page_Width+1, password_Window.passwords_Main_Page.page_Height-27);
 
         saved_Passwords.add(options_Panel, BorderLayout.WEST);
         saved_Passwords.add(scrolling_Passwords);
         
+
+
         return saved_Passwords;
     }
 

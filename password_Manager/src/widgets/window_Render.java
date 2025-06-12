@@ -10,19 +10,13 @@ public class window_Render extends JFrame{
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         super.setTitle(custom_String.title_Bar_Text);
         super.setResizable(false); // Constant size by default.
-        super.setLocation(300, 200);
+        super.setLocation(300, 200); // Constant starting location
     }
 
     // Public 
     public window_Render(){
         set_Default_Window_Data();
         
-    }
-
-    public void clear_Window(){ // Clears all of the contents from the window. Used for changing contents.
-        super.getContentPane().removeAll();
-        super.revalidate();
-        super.repaint();
     }
 
 }
