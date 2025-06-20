@@ -83,11 +83,13 @@ public final class constants {
     }
 
     public final class custom_Color { // Holds the color constants for the window.
-        public static final Color window_Background = Color.getHSBColor(200,200,100);
+        public static final Color window_Background = new Color(150,150,150);
         public static final Color window_Title_bar = Color.DARK_GRAY;
 
-        public static final Color password_Column = Color.BLUE;
+        public static final Color password_Column = new Color(250, 170, 10);
         public static final Color password_Background = Color.GRAY;
+        public static final Color password_Box_Border = Color.BLACK;
+        public static final Color password_Box_Background = new Color(200, 200, 200);
     }
 
     public final class custom_String { // Holds String constants.
