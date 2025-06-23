@@ -5,8 +5,6 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         
-
-
         open = new window_Manager();
     }
 }

@@ -250,7 +250,10 @@ public class window_Manager{
 
         add_New_Password.addActionListener( // Display pop-up to add a new password.
             (e)->{
-                
+                passwords_List.add(new saved_Password_Button("Added", "tes"));
+                passwords_Panel.add(passwords_List.getLast());
+                passwords_Panel.add(Box.createRigidArea(new Dimension(0,10))); // THIS LINE IS A LIFE SAVER AT KEEPING DIMENSIONS!
+                passwords_Panel.updateUI();
             }
         );
 
@@ -282,7 +285,7 @@ public class window_Manager{
             passwords_Panel.add(passwords_List.get(i));
             passwords_Panel.add(Box.createRigidArea(new Dimension(0,10))); // THIS LINE IS A LIFE SAVER AT KEEPING DIMENSIONS!
         }
-        passwords_List.clear();
+
 
     // Scrolling Panel
         scrolling_Passwords = new JScrollPane(passwords_Panel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
