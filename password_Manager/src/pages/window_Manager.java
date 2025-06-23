@@ -6,6 +6,7 @@ package pages;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -40,6 +41,8 @@ public class window_Manager{
     private CardLayout window_Layout;
     private JPanel display_Page;
     
+    private ArrayList<saved_Password_Button> passwords_List;
+
 // Functions
     public window_Manager(){
         window_Layout = new CardLayout();
@@ -232,6 +235,15 @@ public class window_Manager{
         return new_User;
     }
 
+
+    private window_Render add_New_Password_Window(){
+        window_Render new_Window = new window_Render(400,400);
+        new_Window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+
+        return new_Window;
+    }
+
     private JPanel saved_Passwords_Page(){ // Returns a the passwords page to be added to the card layout.
         JPanel saved_Passwords = new JPanel(new BorderLayout());
         JPanel options_Panel = new JPanel(); // Options panel to display the options for adding a new password.
@@ -246,25 +258,50 @@ public class window_Manager{
         JButton add_New_Password = new JButton(custom_String.password_Page.left_Panel.add_Password_Button_Text); // Creates the button add a new password to the list.
         JButton log_Out = new JButton(custom_String.password_Page.left_Panel.logout_Button_Text); // Button to log out of user.
 
-        ArrayList<saved_Password_Button> passwords_List = get_Passwords();    
+        passwords_List = get_Passwords();    
 
+        // Buttons
         add_New_Password.addActionListener( // Display pop-up to add a new password.
             (e)->{
-                passwords_List.add(new saved_Password_Button("Added", "tes"));
-                passwords_Panel.add(passwords_List.getLast());
-                passwords_Panel.add(Box.createRigidArea(new Dimension(0,10))); // THIS LINE IS A LIFE SAVER AT KEEPING DIMENSIONS!
-                passwords_Panel.updateUI();
+                // Temporary code to add a new password for the user.
+                window_Render new_Password_Window = add_New_Password_Window(); // Creates the new window to add the password.
+                JPanel new_Password_Panel = new JPanel();
+                JButton add_Password_Button = new JButton("Add New Password");
+                JButton cancel_Password_Button = new JButton("Cancel");
+
+                
+                new_Password_Window.setAlwaysOnTop(true);;
+                new_Password_Panel.setBackground(constants.custom_Color.window_Background);
+
+                new_Password_Panel.add(add_Password_Button);
+                new_Password_Panel.add(cancel_Password_Button);
+
+                add_Password_Button.addActionListener( // Button saves values from the entered fields and closes the popup window.
+                    (a) -> {
+                        passwords_List.add(new saved_Password_Button("Added", "tes"));
+                        passwords_Panel.add(passwords_List.getLast());
+                        passwords_Panel.add(Box.createRigidArea(new Dimension(0,10))); // THIS LINE IS A LIFE SAVER AT KEEPING DIMENSIONS!
+                        passwords_Panel.updateUI();
+                        new_Password_Window.dispose(); // Close the window after adding new password.
+                    }
+                );
+
+                cancel_Password_Button.addActionListener( // Closes the window without saving.
+                    (a) -> {
+                        new_Password_Window.dispose();
+                    }
+                );
+
+                new_Password_Window.setVisible(true);
+                new_Password_Window.add(new_Password_Panel); // Adds the UI for the window.
             }
         );
 
-        // Buttons
         log_Out.addActionListener( // Logout and return to login page.
             (e)->{
                 navigate_Page(window_Page_Num.login);
             }
         );
-
-
 
     // Options Panel 
         options_Panel.setSize(password_Window.left_Panel_Dimen.column_Width, password_Window.left_Panel_Dimen.column_Height); // Set dimensions for the column.

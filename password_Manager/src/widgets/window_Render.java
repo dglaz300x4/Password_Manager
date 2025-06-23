@@ -13,10 +13,14 @@ public class window_Render extends JFrame{
         super.setLocation(300, 200); // Constant starting location
     }
 
+    public window_Render(int width, int height){
+        set_Default_Window_Data();
+        super.setSize(width, height);
+    }
+
     // Public 
     public window_Render(){
         set_Default_Window_Data();
-        
     }
 
 }
