@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import constants.constants;
+import constants.constants.custom_Color;
 
 public class saved_Password_Button extends JPanel{
     private String saved_Username;
@@ -20,7 +21,14 @@ public class saved_Password_Button extends JPanel{
         saved_Username = username;
 
         JButton password_Button = new JButton(saved_Username);
-        JButton edit_Password = new JButton("...");
+        JButton edit_Password_Button = new JButton("...");
+        
+        password_Button.setSize(200,200);
+        password_Button.setSize(200,200);
+
+        super.setBackground(custom_Color.password_Box_Background);
+        super.setBorder(BorderFactory.createLineBorder(custom_Color.password_Box_Border));
+
         setLayout(new FlowLayout());
         password_Button.addActionListener(
             (e) -> {
@@ -28,20 +36,18 @@ public class saved_Password_Button extends JPanel{
             }
         );
         
-        edit_Password.addActionListener(
+        edit_Password_Button.addActionListener(
             (e) -> {
                 System.out.println("Edit");
             }
         );
         super.add(password_Button);
-        super.add(new JButton("2nd"));
+        super.add(edit_Password_Button);
 
         super.setMaximumSize(fixed_Sizing);
         super.setMinimumSize(fixed_Sizing);
         super.setPreferredSize(fixed_Sizing);
 
-        super.setBackground(Color.CYAN);
-        super.setBorder(BorderFactory.createLineBorder(Color.black));
 
     }
 }
