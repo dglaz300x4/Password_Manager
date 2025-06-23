@@ -69,7 +69,7 @@ public final class constants {
             public static final int page_Height = height;
 
             public static final int button_Height = page_Height/12;
-            public static final int button_Width = page_Width/3;
+            public static final int button_Width = (page_Width*9)/10;
         }
 
     }
