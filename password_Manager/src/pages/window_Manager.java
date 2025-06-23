@@ -13,11 +13,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.CardLayout;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.Box;
@@ -241,6 +238,7 @@ public class window_Manager{
         JPanel passwords_Panel = new JPanel(); // Passwords panel to display the list of passwords.
 
         BoxLayout password_Panel_Layout = new BoxLayout(passwords_Panel, BoxLayout.Y_AXIS);
+        BoxLayout options_Panel_Layout = new BoxLayout(options_Panel, BoxLayout.Y_AXIS);
 
         JScrollPane scrolling_Passwords; // Scrolling panel to add the passwords panel to that would make the page scrollable.
 
@@ -250,6 +248,12 @@ public class window_Manager{
 
         ArrayList<saved_Password_Button> passwords_List = get_Passwords();    
 
+        add_New_Password.addActionListener( // Display pop-up to add a new password.
+            (e)->{
+                
+            }
+        );
+
         // Buttons
         log_Out.addActionListener( // Logout and return to login page.
             (e)->{
@@ -258,33 +262,35 @@ public class window_Manager{
         );
 
 
-        // Options Panel 
-        options_Panel.setBounds(0,0, password_Window.left_Panel_Dimen.column_Width, password_Window.left_Panel_Dimen.column_Height); // Set dimensions and location for the column.
-        options_Panel.setBackground(custom_Color.password_Column); // Set background color for column.
-        options_Panel.setLayout(new BoxLayout(options_Panel, BoxLayout.Y_AXIS));
 
+    // Options Panel 
+        options_Panel.setSize(password_Window.left_Panel_Dimen.column_Width, password_Window.left_Panel_Dimen.column_Height); // Set dimensions for the column.
+        options_Panel.setBackground(custom_Color.password_Column); // Set background color for column.
+        options_Panel.setLayout(options_Panel_Layout);
+        
+        // Add buttons to options panel.
         options_Panel.add(add_New_Password);
         options_Panel.add(log_Out);
 
-        // Passwords Panel
-        passwords_Panel.setSize(password_Window.passwords_Main_Page.page_Width, password_Window.passwords_Main_Page.page_Height);
-        passwords_Panel.setBackground(custom_Color.password_Background);
+    // Passwords Panel
+        passwords_Panel.setSize(password_Window.passwords_Main_Page.page_Width, password_Window.passwords_Main_Page.page_Height); // Set dimensions for the column.
+        passwords_Panel.setBackground(custom_Color.password_Background); // Set background color for column.
         passwords_Panel.setLayout(password_Panel_Layout);
         
+        // Add items to passwords panel.
         for (int i = 0; i < passwords_List.size(); ++i){
             passwords_Panel.add(passwords_List.get(i));
             passwords_Panel.add(Box.createRigidArea(new Dimension(0,10))); // THIS LINE IS A LIFE SAVER AT KEEPING DIMENSIONS!
         }
+        passwords_List.clear();
 
-        // Scrolling Panel
+    // Scrolling Panel
         scrolling_Passwords = new JScrollPane(passwords_Panel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrolling_Passwords.setBounds(password_Window.left_Panel_Dimen.column_Width, 0, password_Window.passwords_Main_Page.page_Width+1, password_Window.passwords_Main_Page.page_Height-27);
 
         saved_Passwords.add(options_Panel, BorderLayout.WEST);
         saved_Passwords.add(scrolling_Passwords);
         
-
-
         return saved_Passwords;
     }
 
