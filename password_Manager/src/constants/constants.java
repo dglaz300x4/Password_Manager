@@ -86,10 +86,10 @@ public final class constants {
         public static final Color window_Background = new Color(150,150,150);
         public static final Color window_Title_bar = Color.DARK_GRAY;
 
-        public static final Color password_Column = new Color(250, 170, 10);
+        public static final Color password_Column = new Color(100, 150, 200);
         public static final Color password_Background = Color.GRAY;
         public static final Color password_Box_Border = Color.BLACK;
-        public static final Color password_Box_Background = new Color(200, 200, 200);
+        public static final Color password_Box_Background = new Color(100, 150, 200);
     }
 
     public final class custom_String { // Holds String constants.
