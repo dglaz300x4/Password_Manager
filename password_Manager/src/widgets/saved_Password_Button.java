@@ -3,6 +3,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -21,8 +23,9 @@ public class saved_Password_Button extends JPanel{
         JButton password_Button = new JButton(saved_Username);
         JButton edit_Password_Button = new JButton("...");
         
-        password_Button.setSize(200,200);
-        password_Button.setSize(200,200);
+        //password_Button.setSize(500,300);
+        password_Button.setPreferredSize(new Dimension(700,50));
+        edit_Password_Button.setPreferredSize(new Dimension(20,20));
 
         super.setBackground(custom_Color.password_Box_Background);
         super.setBorder(BorderFactory.createLineBorder(custom_Color.password_Box_Border));
@@ -39,7 +42,12 @@ public class saved_Password_Button extends JPanel{
                 System.out.println("Edit");
             }
         );
+
+        super.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+
+
         super.add(password_Button);
+        super.add(Box.createRigidArea(new Dimension(10,0)));
         super.add(edit_Password_Button);
 
         super.setMaximumSize(fixed_Sizing);

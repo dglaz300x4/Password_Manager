@@ -270,7 +270,7 @@ public class window_Manager{
                 JButton cancel_Password_Button = new JButton("Cancel");
 
                 
-                new_Password_Window.setAlwaysOnTop(true);;
+                new_Password_Window.setAlwaysOnTop(true);
                 new_Password_Panel.setBackground(constants.custom_Color.window_Background);
 
                 new_Password_Panel.add(add_Password_Button);
