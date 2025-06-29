@@ -1,2 +1,2 @@
 # Password_Manager
- simple password manager in java
+A simple password manager made with java
