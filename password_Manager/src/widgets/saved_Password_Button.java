@@ -9,12 +9,12 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import constants.constants;
-import constants.constants.custom_Color;
+import constants.constants.CUSTOM_COLOR;
 
 public class saved_Password_Button extends JPanel{
     private String saved_Username;
     private String saved_Password;
-    private Dimension fixed_Sizing = new Dimension(constants.password_Window.passwords_Main_Page.button_Width,constants.password_Window.passwords_Main_Page.button_Height);
+    private Dimension fixed_Sizing = new Dimension(constants.PASSWORD_WINDOW.PASSWORDS_MAIN_PAGE.BUTTON_WIDTH,constants.PASSWORD_WINDOW.PASSWORDS_MAIN_PAGE.BUTTON_HEIGHT);
 
     public saved_Password_Button(String username, String password){
         saved_Password = password;
@@ -23,12 +23,11 @@ public class saved_Password_Button extends JPanel{
         JButton password_Button = new JButton(saved_Username);
         JButton edit_Password_Button = new JButton("...");
         
-        //password_Button.setSize(500,300);
         password_Button.setPreferredSize(new Dimension(700,50));
         edit_Password_Button.setPreferredSize(new Dimension(20,20));
 
-        super.setBackground(custom_Color.password_Box_Background);
-        super.setBorder(BorderFactory.createLineBorder(custom_Color.password_Box_Border));
+        super.setBackground(CUSTOM_COLOR.PASSWORD_BOX_BACKGROUND);
+        super.setBorder(BorderFactory.createLineBorder(CUSTOM_COLOR.PASSWORD_BOX_BORDER));
 
         setLayout(new FlowLayout());
         password_Button.addActionListener(
@@ -47,7 +46,7 @@ public class saved_Password_Button extends JPanel{
 
 
         super.add(password_Button);
-        super.add(Box.createRigidArea(new Dimension(10,0)));
+        super.add(Box.createRigidArea(new Dimension(5,0)));
         super.add(edit_Password_Button);
 
         super.setMaximumSize(fixed_Sizing);
