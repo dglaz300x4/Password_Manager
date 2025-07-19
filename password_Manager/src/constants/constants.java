@@ -9,22 +9,22 @@ public final class constants {
         // You shall not call!
     }
 
-    public final class page_Names {
-        public static final String login_Page = window_Page_Num.login.toString();
-        public static final String create_User_Page = window_Page_Num.create_User.toString();
-        public static final String passwords_Page = window_Page_Num.saved_Passwords.toString();
+    public final class PAGE_NAMES {
+        public static final String LOGIN_PAGE = WINDOW_PAGE_NUM.LOGIN.toString();
+        public static final String CREATE_USER_PAGE = WINDOW_PAGE_NUM.CREATE_USER.toString();
+        public static final String PASSWORDS_PAGE = WINDOW_PAGE_NUM.SAVED_PASSWORDS.toString();
 
-        public static String get_Name(window_Page_Num page){
+        public static String get_Name(WINDOW_PAGE_NUM page){
             String page_Name = new String();
             switch (page) {
-                case window_Page_Num.login:
-                    page_Name = login_Page;
+                case WINDOW_PAGE_NUM.LOGIN:
+                    page_Name = LOGIN_PAGE;
                     break;
-                case window_Page_Num.create_User:
-                    page_Name = create_User_Page;
+                case WINDOW_PAGE_NUM.CREATE_USER:
+                    page_Name = CREATE_USER_PAGE;
                     break;
-                case window_Page_Num.saved_Passwords:
-                    page_Name = passwords_Page;
+                case WINDOW_PAGE_NUM.SAVED_PASSWORDS:
+                    page_Name = PASSWORDS_PAGE;
                     break;
 
             }
@@ -32,93 +32,93 @@ public final class constants {
         }
     }
 
-    public final class login_Window { // Holds the constant login window dimensions.
+    public final class LOGIN_WINDOW { // Holds the constant login window dimensions.
 
-        private login_Window(){}
+        private LOGIN_WINDOW(){}
 
-        public static final int height = 200;
-        public static final int width = 500;
-        public static final int left_Bound_X = width/3;
-        public static final int top_Bound_Y = 20;
-        public static final int login_Input_Field_Width = 130;
-        public static final int login_Input_Field_Height = 33;
-        public static final int login_Page_Button_Width = width/3;
-        public static final int login_Page_Button_Height = height/10;
+        public static final int HEIGHT = 200;
+        public static final int WIDTH = 500;
+        public static final int LEFT_BOUND_X = WIDTH/3;
+        public static final int TOP_BOUND_Y = 20;
+        public static final int LOGIN_INPUT_FIELD_WIDTH = 130;
+        public static final int LOGIN_INPUT_FIELD_HEIGHT = 33;
+        public static final int LOGIN_PAGE_BUTTON_WIDTH = WIDTH/3;
+        public static final int LOGIN_PAGE_BUTTON_HEIGHT = HEIGHT/10;
 
     }
 
-    public final class password_Window {
+    public final class PASSWORD_WINDOW {
         
-        private password_Window(){}
+        private PASSWORD_WINDOW(){}
 
-        public static final int height = 700;
-        public static final int width = 900;
+        public static final int HEIGHT = 700;
+        public static final int WIDTH = 900;
 
-        public final class left_Panel_Dimen{
+        public final class OPTIONS_PANEL_DIMEN{
             
-            private left_Panel_Dimen(){}
+            private OPTIONS_PANEL_DIMEN(){}
 
-            public static final int column_Width = width/5;
-            public static final int column_Height = height;
+            public static final int COLUMN_WIDTH = WIDTH/5;
+            public static final int COLUMN_HEIGHT = HEIGHT;
         }
 
-        public final class passwords_Main_Page{
-            private passwords_Main_Page(){}
+        public final class PASSWORDS_MAIN_PAGE{
+            private PASSWORDS_MAIN_PAGE(){}
 
-            public static final int page_Width = width-left_Panel_Dimen.column_Width;
-            public static final int page_Height = height;
+            public static final int PAGE_WIDTH = WIDTH-OPTIONS_PANEL_DIMEN.COLUMN_WIDTH;
+            public static final int PAGE_HEIGHT = HEIGHT;
 
-            public static final int button_Height = page_Height/12;
-            public static final int button_Width = (page_Width*9)/10;
+            public static final int BUTTON_HEIGHT = PAGE_HEIGHT/12;
+            public static final int BUTTON_WIDTH = (PAGE_WIDTH*9)/10;
         }
 
     }
     
-    public final class custom_Font_Settings { // Holds all the custom set font constants.
-        private static final int normal_Font_Size = 18;
-        private static final String normal_Font_Name = "Arial";
+    public final class CUSTOM_FONT_SETTINGS { // Holds all the custom set font constants.
+        private static final int NORMAL_FONT_SIZE = 18;
+        private static final String NORMAL_FONT_NAME = "Arial";
 
-        public static final Font normal_Font = new Font(normal_Font_Name, Font.PLAIN, normal_Font_Size);
+        public static final Font NORMAL_FONT = new Font(NORMAL_FONT_NAME, Font.PLAIN, NORMAL_FONT_SIZE);
         
     }
 
-    public final class custom_Color { // Holds the color constants for the window.
-        public static final Color window_Background = new Color(150,150,150);
-        public static final Color window_Title_bar = Color.DARK_GRAY;
+    public final class CUSTOM_COLOR { // Holds the color constants for the window.
+        public static final Color WINDOW_BACKGROUND = new Color(150,150,150);
+        public static final Color WINDOW_TITLE_BAR = Color.DARK_GRAY;
 
-        public static final Color password_Column = new Color(100, 150, 200);
-        public static final Color password_Background = Color.GRAY;
-        public static final Color password_Box_Border = Color.BLACK;
-        public static final Color password_Box_Background = new Color(100, 150, 200);
+        public static final Color PASSWORD_COLUMN = new Color(100, 150, 200);
+        public static final Color PASSWORD_BACKGROUND = Color.GRAY;
+        public static final Color PASSWORD_BOX_BORDER = Color.BLACK;
+        public static final Color PASSWORD_BOX_BACKGROUND = new Color(100, 150, 200);
     }
 
-    public final class custom_String { // Holds String constants.
+    public final class CUSTOM_STRING { // Holds String constants.
 
-        public final class login_Page{
-            public static final String username_Label_Text = "Username";
-            public static final String password_Label_Text = "Password";
+        public final class LOGIN_PAGE{
+            public static final String USERNAME_LABEL_TEXT = "Username";
+            public static final String PASSWORD_LABEL_TEXT = "Password";
             
-            public static final String login_Page_Button = "Login";
-            public static final String create_New_User_Button = "New User";
-            public static final String cancel_Button = "Cancel";
-            public static final String add_New_User_Button = "Add User";
+            public static final String LOGIN_PAGE_BUTTON = "Login";
+            public static final String CREATE_NEW_USER_BUTTON = "New User";
+            public static final String CANCEL_BUTTON = "Cancel";
+            public static final String ADD_NEW_USER_BUTTON = "Add User";
         }
 
-        public final class password_Page{
-            public final class left_Panel{
-                public static final String add_Password_Button_Text = "Add New Password";
-                public static final String logout_Button_Text = "Logout";
+        public final class PASSWORD_PAGE{
+            public final class LEFT_PANEL{
+                public static final String ADD_PASSWORD_BUTTON_TEXT = "Add New Password";
+                public static final String LOGOUT_BUTTON_TEXT = "Logout";
             }
 
-            public final class main_Password_Page{
-                public static final String passwords_Title = "Saved Passwords";
-                public static final String no_Saved_Passwords_Text = "There are currently no saved passwords";
+            public final class MAIN_PASSWORD_PAGE{
+                public static final String PASSWORDS_TITLE = "Saved Passwords";
+                public static final String NO_SAVED_PASSWORDS_TEXT = "There are currently no saved passwords";
             }
         }
 
 
-        public static final String title_Bar_Text = "Password Manager";
+        public static final String TITLE_BAR_TEXT = "Password Manager";
     }
 
-    public enum window_Page_Num {login, create_User, saved_Passwords};
+    public enum WINDOW_PAGE_NUM {LOGIN, CREATE_USER, SAVED_PASSWORDS};
 }
