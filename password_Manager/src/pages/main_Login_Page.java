@@ -9,43 +9,40 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 
 import constants.constants;
-import constants.constants.custom_Color;
-import constants.constants.custom_Font_Settings;
-import constants.constants.custom_String;
-import constants.constants.login_Window;
-import constants.constants.window_Page_Num;
-
+import constants.constants.CUSTOM_COLOR;
+import constants.constants.CUSTOM_FONT_SETTINGS;
+import constants.constants.CUSTOM_STRING;
+import constants.constants.LOGIN_WINDOW;
 
 public class main_Login_Page extends JPanel {
     // Labels to direct user to which field is for which input.
-    private JLabel username_Label = new JLabel(custom_String.login_Page.username_Label_Text); 
-    private JLabel password_Label = new JLabel(custom_String.login_Page.password_Label_Text);
+    private JLabel username_Label = new JLabel(CUSTOM_STRING.LOGIN_PAGE.USERNAME_LABEL_TEXT); 
+    private JLabel password_Label = new JLabel(CUSTOM_STRING.LOGIN_PAGE.PASSWORD_LABEL_TEXT);
 
     // Input fields for username and password.
     private JTextField user_Name_Field = new JTextField();
     private JPasswordField password_Field = new JPasswordField();
         
     // Buttons for logging in and adding a new user.
-    private JButton login_Button = new JButton(custom_String.login_Page.login_Page_Button);
-    private JButton create_User_Button = new JButton(custom_String.login_Page.create_New_User_Button);
+    private JButton login_Button = new JButton(CUSTOM_STRING.LOGIN_PAGE.LOGIN_PAGE_BUTTON);
+    private JButton create_User_Button = new JButton(CUSTOM_STRING.LOGIN_PAGE.CREATE_NEW_USER_BUTTON);
         
     // Set button dimensions.
-    private int button_Width = constants.login_Window.login_Page_Button_Width;
-    private int button_Height = constants.login_Window.login_Page_Button_Height;
-    private static final int left_Bound_X = login_Window.left_Bound_X; // Set the top and left bounds of the screen.
-    private static final int top_Bound_Y = login_Window.top_Bound_Y;
-    private static final int field_Width = login_Window.login_Input_Field_Width;
-    private static final int field_Height = login_Window.login_Input_Field_Height;
+    private int button_Width = constants.LOGIN_WINDOW.LOGIN_PAGE_BUTTON_WIDTH;
+    private int button_Height = constants.LOGIN_WINDOW.LOGIN_PAGE_BUTTON_HEIGHT;
+    private final int left_Bound_X = LOGIN_WINDOW.LEFT_BOUND_X; // Set the top and left bounds of the screen.
+    private final int top_Bound_Y = LOGIN_WINDOW.TOP_BOUND_Y;
+    private final int field_Width = LOGIN_WINDOW.LOGIN_INPUT_FIELD_WIDTH;
+    private final int field_Height = LOGIN_WINDOW.LOGIN_INPUT_FIELD_HEIGHT;
+    private final int window_Width = constants.LOGIN_WINDOW.WIDTH;
+    private final int window_Height = constants.LOGIN_WINDOW.HEIGHT;
 
-    private final Font font = custom_Font_Settings.normal_Font; 
-    
-    public static final int window_Width = constants.login_Window.width;
-    public static final int window_Height = constants.login_Window.height;
+    private final Font font = CUSTOM_FONT_SETTINGS.NORMAL_FONT; 
 
     public main_Login_Page(ActionListener navigate_Page_Passwords, ActionListener navigate_Page_New_User){
         // Set panel layout, color, and dimensions.
         this.setLayout(null);
-        this.setBackground(custom_Color.window_Background);
+        this.setBackground(CUSTOM_COLOR.WINDOW_BACKGROUND);
         this.setSize(window_Width, window_Height);
 
         // Set fonts.

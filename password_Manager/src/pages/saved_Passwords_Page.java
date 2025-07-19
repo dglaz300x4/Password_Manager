@@ -12,9 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import constants.constants.custom_Color;
-import constants.constants.custom_String;
-import constants.constants.password_Window;
+import constants.constants.CUSTOM_COLOR;
+import constants.constants.CUSTOM_STRING;
+import constants.constants.PASSWORD_WINDOW;
 import widgets.saved_Password_Button;
 import widgets.window_Render;
 
@@ -23,16 +23,20 @@ import widgets.window_Render;
 public class saved_Passwords_Page extends JPanel {
     private JPanel options_Panel = new JPanel(); // Options panel to display the options for adding a new password.
     private JPanel passwords_Panel = new JPanel(); // Passwords panel to display the list of passwords.
-
-    private BoxLayout password_Panel_Layout = new BoxLayout(passwords_Panel, BoxLayout.Y_AXIS);
-    private BoxLayout options_Panel_Layout = new BoxLayout(options_Panel, BoxLayout.Y_AXIS);
-
-    private JScrollPane scrolling_Passwords; // Scrolling panel to add the passwords panel to that would make the page scrollable.
-        
-    private JButton add_New_Password = new JButton(custom_String.password_Page.left_Panel.add_Password_Button_Text); // Creates the button add a new password to the list.
-    private JButton log_Out = new JButton(custom_String.password_Page.left_Panel.logout_Button_Text); // Button to log out of user.
     
     private ArrayList<saved_Password_Button> passwords_List;
+    
+    private JScrollPane scrolling_Passwords; // Scrolling panel to add the passwords panel to that would make the page scrollable.
+    
+    private final BoxLayout password_Panel_Layout = new BoxLayout(passwords_Panel, BoxLayout.Y_AXIS);
+    private final BoxLayout options_Panel_Layout = new BoxLayout(options_Panel, BoxLayout.Y_AXIS);
+
+    private final JButton add_New_Password = new JButton(CUSTOM_STRING.PASSWORD_PAGE.LEFT_PANEL.ADD_PASSWORD_BUTTON_TEXT); // Creates the button add a new password to the list.
+    private final JButton log_Out = new JButton(CUSTOM_STRING.PASSWORD_PAGE.LEFT_PANEL.LOGOUT_BUTTON_TEXT); // Button to log out of user.
+    
+    private final Dimension option_Panel_Size = new Dimension(PASSWORD_WINDOW.OPTIONS_PANEL_DIMEN.COLUMN_WIDTH, PASSWORD_WINDOW.OPTIONS_PANEL_DIMEN.COLUMN_HEIGHT);
+    private final Dimension option_Panel_Button_Size = new Dimension(PASSWORD_WINDOW.OPTIONS_PANEL_DIMEN.COLUMN_WIDTH,20);
+
 
     public saved_Passwords_Page(ActionListener navigate_To_Login_Listener){
         this.setLayout(new BorderLayout());
@@ -50,23 +54,25 @@ public class saved_Passwords_Page extends JPanel {
         log_Out.addActionListener(navigate_To_Login_Listener); // Logout and return to login page.
 
     // Options Panel 
-        options_Panel.setSize(password_Window.options_Panel_Dimen.column_Width, password_Window.options_Panel_Dimen.column_Height); // Set dimensions for the column.
-        options_Panel.setBackground(custom_Color.password_Column); // Set background color for column.
+        options_Panel.setMinimumSize(option_Panel_Size);
+        options_Panel.setMaximumSize(option_Panel_Size);
+        options_Panel.setBackground(CUSTOM_COLOR.PASSWORD_COLUMN); // Set background color for column.
         options_Panel.setLayout(options_Panel_Layout);
-        
-        Dimension button = new Dimension(password_Window.options_Panel_Dimen.column_Width, 20);
 
-        add_New_Password.setPreferredSize(button);
-        log_Out.setPreferredSize(button);
+        options_Panel_Layout.maximumLayoutSize(options_Panel);
 
+        add_New_Password.setMaximumSize(option_Panel_Button_Size);
+        add_New_Password.setMinimumSize(option_Panel_Button_Size);
+        log_Out.setMaximumSize(option_Panel_Button_Size);
+        log_Out.setMinimumSize(option_Panel_Button_Size);
 
         // Add buttons to options panel.
         options_Panel.add(add_New_Password);
         options_Panel.add(log_Out);
 
     // Passwords Panel
-        passwords_Panel.setSize(password_Window.passwords_Main_Page.page_Width, password_Window.passwords_Main_Page.page_Height); // Set dimensions for the column.
-        passwords_Panel.setBackground(custom_Color.password_Background); // Set background color for column.
+        passwords_Panel.setSize(PASSWORD_WINDOW.PASSWORDS_MAIN_PAGE.PAGE_WIDTH, PASSWORD_WINDOW.PASSWORDS_MAIN_PAGE.PAGE_HEIGHT); // Set dimensions for the column.
+        passwords_Panel.setBackground(CUSTOM_COLOR.PASSWORD_BACKGROUND); // Set background color for column.
         passwords_Panel.setLayout(password_Panel_Layout);
         
         // Add items to passwords panel.
@@ -78,7 +84,7 @@ public class saved_Passwords_Page extends JPanel {
 
     // Scrolling Panel
         scrolling_Passwords = new JScrollPane(passwords_Panel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrolling_Passwords.setBounds(password_Window.options_Panel_Dimen.column_Width, 0, password_Window.passwords_Main_Page.page_Width+1, password_Window.passwords_Main_Page.page_Height-27);
+        scrolling_Passwords.setBounds(PASSWORD_WINDOW.OPTIONS_PANEL_DIMEN.COLUMN_WIDTH, 0, PASSWORD_WINDOW.PASSWORDS_MAIN_PAGE.PAGE_WIDTH+1, PASSWORD_WINDOW.PASSWORDS_MAIN_PAGE.PAGE_HEIGHT-27);
 
         this.add(options_Panel, BorderLayout.WEST);
         this.add(scrolling_Passwords);
@@ -106,7 +112,7 @@ public class saved_Passwords_Page extends JPanel {
 
                 
         new_Window.setAlwaysOnTop(true);
-        new_Password_Panel.setBackground(custom_Color.window_Background);
+        new_Password_Panel.setBackground(CUSTOM_COLOR.WINDOW_BACKGROUND);
 
         new_Password_Panel.add(add_Password_Button);
         new_Password_Panel.add(cancel_Password_Button);

@@ -19,7 +19,7 @@ public class window_Manager{
     private static int window_Height; // Set dimentions of the window.
     private static int window_Width;
 
-    private static window_Page_Num current_Page; 
+    private static WINDOW_PAGE_NUM current_Page; 
 
     private window_Render window = new window_Render(); // Window to be created.
     private CardLayout window_Layout;
@@ -32,31 +32,31 @@ public class window_Manager{
         window_Layout = new CardLayout();
         display_Page = new JPanel(window_Layout);
         window = new window_Render();
-        window.setBackground(custom_Color.window_Title_bar); // Set the title bar to a gray.
-        window.getContentPane().setBackground(custom_Color.window_Background); // Set the background color to a light gray.
+        window.setBackground(CUSTOM_COLOR.WINDOW_TITLE_BAR); // Set the title bar to a gray.
+        window.getContentPane().setBackground(CUSTOM_COLOR.WINDOW_BACKGROUND); // Set the background color to a light gray.
         fill_Card_Layout_Pages();
 
-        navigate_Page(window_Page_Num.login);
+        navigate_Page(WINDOW_PAGE_NUM.LOGIN);
 
         window.setVisible(true); // Display the window. 
 
     }
 
-    private void navigate_Page(window_Page_Num page){ // Navigate to, and set, page given the page number.
+    private void navigate_Page(WINDOW_PAGE_NUM page){ // Navigate to, and set, page given the page number.
 
         if (current_Page != page){
             current_Page = page;
 
             switch (page) { // Left as a switch to allow for future page additions.
-                case window_Page_Num.login: // Login and create user pages have same size.
-                case window_Page_Num.create_User:
-                    window_Width = constants.login_Window.width;
-                    window_Height = constants.login_Window.height;
+                case WINDOW_PAGE_NUM.LOGIN: // Login and create user pages have same size.
+                case WINDOW_PAGE_NUM.CREATE_USER:
+                    window_Width = constants.LOGIN_WINDOW.WIDTH;
+                    window_Height = constants.LOGIN_WINDOW.HEIGHT;
                     break;
                 
-                case window_Page_Num.saved_Passwords: // Increase window size when 
-                    window_Width = constants.password_Window.width;
-                    window_Height = constants.password_Window.height;
+                case WINDOW_PAGE_NUM.SAVED_PASSWORDS: // Increase window size when 
+                    window_Width = constants.PASSWORD_WINDOW.WIDTH;
+                    window_Height = constants.PASSWORD_WINDOW.HEIGHT;
                     break;
                 
                 default:
@@ -65,22 +65,22 @@ public class window_Manager{
 
             window.setSize(window_Width, window_Height);
     
-            window_Layout.show(display_Page, constants.page_Names.get_Name(page));
+            window_Layout.show(display_Page, constants.PAGE_NAMES.get_Name(page));
 
         }
     }
 
     private void fill_Card_Layout_Pages(){
-        display_Page.add(main_Login_Page(),constants.page_Names.login_Page);
-        display_Page.add(new_User_Login_Page(),constants.page_Names.create_User_Page);
-        display_Page.add(saved_Passwords_Page(),constants.page_Names.passwords_Page);
+        display_Page.add(main_Login_Page(),constants.PAGE_NAMES.LOGIN_PAGE);
+        display_Page.add(new_User_Login_Page(),constants.PAGE_NAMES.CREATE_USER_PAGE);
+        display_Page.add(saved_Passwords_Page(),constants.PAGE_NAMES.PASSWORDS_PAGE);
         window.add(display_Page);
     }
 
     private ActionListener login_Page_Navigation_Listener(){
         return new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                navigate_Page(window_Page_Num.login);
+                navigate_Page(WINDOW_PAGE_NUM.LOGIN);
             }
         };
     }
@@ -88,7 +88,7 @@ public class window_Manager{
     private ActionListener passwords_Page_Navigation_Listener(){
         return new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                navigate_Page(window_Page_Num.saved_Passwords);
+                navigate_Page(WINDOW_PAGE_NUM.SAVED_PASSWORDS);
             }
         };
     }
@@ -100,7 +100,7 @@ public class window_Manager{
 
         nav_To_New_User = new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                navigate_Page(window_Page_Num.create_User);
+                navigate_Page(WINDOW_PAGE_NUM.CREATE_USER);
             }
         };
         nav_To_Passwords = passwords_Page_Navigation_Listener();
