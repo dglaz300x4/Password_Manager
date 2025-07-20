@@ -105,7 +105,7 @@ public class window_Manager{
         };
         nav_To_Passwords = passwords_Page_Navigation_Listener();
         
-        return new main_Login_Page(nav_To_Passwords,nav_To_New_User);
+        return new login_Page(nav_To_Passwords,nav_To_New_User);
     }
 
     private JPanel new_User_Login_Page(){ // Returns the new user login page to be added to the card layout
