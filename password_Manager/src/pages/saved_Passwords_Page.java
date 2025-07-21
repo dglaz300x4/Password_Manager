@@ -2,21 +2,22 @@ package pages;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import classes.password_Info;
 import constants.constants.CUSTOM_COLOR;
 import constants.constants.CUSTOM_STRING;
 import constants.constants.PASSWORD_WINDOW;
+import widgets.add_Password_Listener;
 import widgets.saved_Password_Button;
-import widgets.window_Render;
 
 
 
@@ -97,46 +98,27 @@ public class saved_Passwords_Page extends JPanel {
         //* Update this to reflect data pulled from DB later
 
         for (int i = 0; i < 3; ++i){
-            temp.add(new saved_Password_Button("Hello","Goodbye"+i));
+            temp.add(new saved_Password_Button(new password_Info("Website"+i,"Username"+i,"Password"+i)));
         }        
         
         return temp;
     }
     
-    private window_Render add_New_Password_Window(){
-        window_Render new_Window = new window_Render(400,400);
-        new_Window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        JPanel new_Password_Panel = new JPanel();
-        JButton add_Password_Button = new JButton("Add New Password");
-                JButton cancel_Password_Button = new JButton("Cancel");
-
-                
-        new_Window.setAlwaysOnTop(true);
-        new_Password_Panel.setBackground(CUSTOM_COLOR.WINDOW_BACKGROUND);
-
-        new_Password_Panel.add(add_Password_Button);
-        new_Password_Panel.add(cancel_Password_Button);
-
-        add_Password_Button.addActionListener( // Button saves values from the entered fields and closes the popup window.
-            (a) -> {
-                passwords_List.add(new saved_Password_Button("Added", "tes"));
+    private void add_New_Password_Window(){
+        add_Password_Listener password_listener;
+        ActionListener listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                passwords_List.add(new saved_Password_Button(new password_Info("Website", "Username", "Password")));
                 passwords_Panel.add(passwords_List.getLast());
                 passwords_Panel.add(Box.createRigidArea(new Dimension(0,10))); // THIS LINE IS A LIFE SAVER AT KEEPING DIMENSIONS!
                 passwords_Panel.updateUI();
-                new_Window.dispose(); // Close the window after adding new password.
             }
-        );
+        };
+        
+        password_listener  = new add_Password_Listener(listener);
 
-        cancel_Password_Button.addActionListener( // Closes the window without saving.
-            (a) -> {
-                new_Window.dispose();
-            }
-        );
-
-        new_Window.setVisible(true);
-        new_Window.add(new_Password_Panel); // Adds the UI for the window.
-
-        return new_Window;
+        add_Password_Window window = new add_Password_Window(password_listener);
     }
 
 }
