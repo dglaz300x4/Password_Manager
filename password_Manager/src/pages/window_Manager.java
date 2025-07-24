@@ -21,7 +21,7 @@ public class window_Manager{
 
     private static WINDOW_PAGE_NUM current_Page; 
 
-    private window_Render window = new window_Render(); // Window to be created.
+    private window_Render window; // Window to be created.
     private CardLayout window_Layout;
     private JPanel display_Page;
     
