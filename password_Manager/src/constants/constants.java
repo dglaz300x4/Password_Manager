@@ -94,16 +94,29 @@ public final class constants {
 
     public final class CUSTOM_STRING { // Holds String constants.
 
-        public final class LOGIN_PAGE{
+        public final class MAIN_LOGIN_PAGE{
             public static final String USERNAME_LABEL_TEXT = "Username";
             public static final String PASSWORD_LABEL_TEXT = "Password";
             
-            public static final String LOGIN_PAGE_BUTTON = "Login";
-            public static final String CREATE_NEW_USER_BUTTON = "New User";
-            public static final String CANCEL_BUTTON = "Cancel";
-            public static final String ADD_NEW_USER_BUTTON = "Add User";
-        }
+            public final class LOGIN_PAGE{
+                public static final String LOGIN_PAGE_BUTTON = "Login";
+                public static final String CREATE_NEW_USER_BUTTON = "New User";
+            }
 
+            public final class NEW_USER_PAGE{
+                public static final String CANCEL_BUTTON = "Cancel";
+                public static final String ADD_NEW_USER_BUTTON = "Add User";
+            }
+        }
+        
+        public final class ADD_NEW_PASSWORD_WINDOW{
+
+            public static final String WEBSITE = "Website/App";
+            public static final String USERNAME = "Username";
+            public static final String PASSWORD = "Password";
+            public static final String ADD_NEW_PASSWORD_BUTTON = "Add New Password";
+            public static final String CANCEL_BUTTON = "Cancel";
+        }
         public final class PASSWORD_PAGE{
             public final class LEFT_PANEL{
                 public static final String ADD_PASSWORD_BUTTON_TEXT = "Add New Password";
