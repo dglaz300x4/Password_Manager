@@ -2,7 +2,6 @@ package pages;
 
 import java.awt.Font;
 import java.awt.Rectangle;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,7 +14,7 @@ import constants.constants.CUSTOM_COLOR;
 import constants.constants.CUSTOM_FONT_SETTINGS;
 import constants.constants.CUSTOM_STRING;
 import constants.constants.LOGIN_WINDOW;
-import widgets.add_Password_Listener;
+import widgets.new_Password_Saver;
 import widgets.window_Render;
 
 public class add_Password_Window {
@@ -36,7 +35,7 @@ public class add_Password_Window {
 
     private final Font font = CUSTOM_FONT_SETTINGS.NORMAL_FONT; 
     
-    public add_Password_Window(add_Password_Listener window_Listener){
+    public add_Password_Window(new_Password_Saver window_Listener){
         Rectangle title_Bounds = new Rectangle(40,LOGIN_WINDOW.TOP_BOUND_Y,LOGIN_WINDOW.LOGIN_INPUT_FIELD_WIDTH,LOGIN_WINDOW.LOGIN_INPUT_FIELD_HEIGHT);
         Rectangle button_Bounds = new Rectangle(title_Bounds.width+40,LOGIN_WINDOW.TOP_BOUND_Y,LOGIN_WINDOW.LOGIN_INPUT_FIELD_WIDTH,LOGIN_WINDOW.LOGIN_INPUT_FIELD_HEIGHT);
         int spacer = 10;
@@ -89,7 +88,7 @@ public class add_Password_Window {
 
         add_Password_Button.addActionListener( // Button saves values from the entered fields and closes the popup window.
             (a) -> {
-                window_Listener.set_Password_Info(new password_Info());
+                window_Listener.set_Password_Info(new password_Info(website_Field.getText(), username_Field.getText(), password_Field.getText()));
                 window_Listener.actionPerformed(a);
                 new_Window.dispose(); // Close the window after adding new password.
             }
@@ -101,9 +100,14 @@ public class add_Password_Window {
             }
         );
 
-        new_Window.setVisible(true);
+        
         new_Window.add(new_Password_Panel); // Adds the UI for the window.
     }
 
+    public void run(){
+        new_Window.setVisible(true);
+    }
+    public password_Info get_Password_Info(){
+        return new password_Info(website_Field.getText(), username_Field.getText(), password_Field.getText());
+    }
 }
-        

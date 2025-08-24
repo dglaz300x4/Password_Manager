@@ -16,7 +16,7 @@ import classes.password_Info;
 import constants.constants.CUSTOM_COLOR;
 import constants.constants.CUSTOM_STRING;
 import constants.constants.PASSWORD_WINDOW;
-import widgets.add_Password_Listener;
+import widgets.new_Password_Saver;
 import widgets.saved_Password_Button;
 
 
@@ -38,6 +38,14 @@ public class saved_Passwords_Page extends JPanel {
     private final Dimension option_Panel_Size = new Dimension(PASSWORD_WINDOW.OPTIONS_PANEL_DIMEN.COLUMN_WIDTH, PASSWORD_WINDOW.OPTIONS_PANEL_DIMEN.COLUMN_HEIGHT);
     private final Dimension option_Panel_Button_Size = new Dimension(PASSWORD_WINDOW.OPTIONS_PANEL_DIMEN.COLUMN_WIDTH,20);
 
+    private new_Password_Saver password_Listener = new new_Password_Saver() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                passwords_List.add(new saved_Password_Button(new password_Info(super.get_Website_Name(), super.get_Username(), super.get_Password())));
+                add_Password_To_Panel(passwords_List.getLast());
+                passwords_Panel.updateUI();
+            }
+        };
 
     public saved_Passwords_Page(ActionListener navigate_To_Login_Listener){
         this.setLayout(new BorderLayout());
@@ -78,8 +86,7 @@ public class saved_Passwords_Page extends JPanel {
         
         // Add items to passwords panel.
         for (int i = 0; i < passwords_List.size(); ++i){
-            passwords_Panel.add(passwords_List.get(i));
-            passwords_Panel.add(Box.createRigidArea(new Dimension(0,10))); // THIS LINE IS A LIFE SAVER AT KEEPING DIMENSIONS!
+            add_Password_To_Panel(passwords_List.get(i));
         }
 
 
@@ -90,6 +97,11 @@ public class saved_Passwords_Page extends JPanel {
         this.add(options_Panel, BorderLayout.WEST);
         this.add(scrolling_Passwords);
         
+    }
+
+    private void add_Password_To_Panel(saved_Password_Button info){
+        passwords_Panel.add(info);
+        passwords_Panel.add(Box.createRigidArea(new Dimension(0,10))); // THIS LINE IS A LIFE SAVER AT KEEPING DIMENSIONS!
     }
 
     private ArrayList<saved_Password_Button> get_Passwords(){ // Gets the button list for the passwords.
@@ -104,21 +116,10 @@ public class saved_Passwords_Page extends JPanel {
         return temp;
     }
     
-    private void add_New_Password_Window(){
-        add_Password_Listener password_listener;
-        ActionListener listener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                passwords_List.add(new saved_Password_Button(new password_Info("Website", "Username", "Password")));
-                passwords_Panel.add(passwords_List.getLast());
-                passwords_Panel.add(Box.createRigidArea(new Dimension(0,10))); // THIS LINE IS A LIFE SAVER AT KEEPING DIMENSIONS!
-                passwords_Panel.updateUI();
-            }
-        };
+    private void add_New_Password_Window(){ // Creates the window to add the new password.
+        add_Password_Window window = new add_Password_Window(password_Listener);
+        window.run();
         
-        password_listener  = new add_Password_Listener(listener);
-
-        add_Password_Window window = new add_Password_Window(password_listener);
     }
 
 }
